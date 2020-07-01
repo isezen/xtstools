@@ -4,14 +4,14 @@
 \alias{fortify.zoo}
 \title{Convenience Function for Plotting xts or zoo Objects with ggplot2}
 \usage{
-fortify.zoo(
+\method{fortify}{zoo}(
   model,
   data,
   names = c("Index", "Series", "Value"),
   melt = FALSE,
   sep = NULL,
   by = NULL,
-  reduce = TRUE,
+  reduce = FALSE,
   ...
 )
 }

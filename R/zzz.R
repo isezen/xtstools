@@ -22,6 +22,8 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
 
 .onLoad <- function(libname, pkgname) {
   invisible(register_s3_method("ggplot2", "fortify", "zoo"))
+  invisible(register_s3_method("stats", "aggregate", "xts"))
+  invisible(register_s3_method("stats", "aggregate", "formula"))
   # invisible(register_s3_method("zoo", "as.zoo", "timeseries"))
   # invisible(register_s3_method("stats", "as.ts", "timeseries"))
 }

@@ -18,16 +18,19 @@ get_by_factor <- function(index, by) {
     if (inherits(by, "formula")) by <- all.vars(by)
     if (is.character(by)) {
       choices <- c(Y = "year", m = "mon", d = "mday", H = "hour", M = "min",
-                   S = "sec")
+                   S = "sec", MDH = "mdh", WeekDay = "wday",
+                   WeekDayHour = "wdayhour")
       by <- sapply(by, function(x) if (x %in% names(choices)) choices[x] else x)
-      names(choices) <- c("Year", "Month", "Day", "Hour", "Min", "Sec")
+      names(choices) <- c("Year", "Month", "Day", "Hour", "Min", "Sec", "MDH",
+                          "WeekDay", "WeekDayHour")
       by <- sapply(by, function(x) if (x %in% names(choices)) choices[x] else x)
       by <- tryCatch({match.arg(by, choices, several.ok = TRUE)},
                      error = function(e){NULL})
       if (is.null(by)) return(list())
       i <- unclass(index)
       f <- lapply(by, function(p) {
-        i <- i[[p]] + if (p == "year") 1900 else if (p == "mon") 1 else 0
+        # i <- i[[p]] + if (p == "year") 1900 else if (p == "mon") 1 else 0
+        i <- indexx(index, p)
         if (p == "mon")
           factor(i, levels = unique(i), labels = month.name)
         else
@@ -64,7 +67,7 @@ get_by_factor <- function(index, by) {
 #'               See \code{\link{reduce}}.
 #' @keywords internal
 fortify.zoo <- function(model, data, names = c("Index", "Series", "Value"),
-                        melt = FALSE, sep = NULL, by = NULL, reduce = TRUE, ...) {
+                        melt = FALSE, sep = NULL, by = NULL, reduce = FALSE, ...) {
   if (!is.null(sep) && !melt) stop("Cannot specify sep if melt = FALSE")
   n <- NROW(model)
   k <- NCOL(model)
