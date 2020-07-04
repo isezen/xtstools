@@ -57,7 +57,8 @@ aggregate.formula <- function(formula, data, FUN, ..., subset,
     stop("'formula' missing or incorrect")
   if (length(formula) != 3L)
     stop("'formula' must have both left and right hand sides")
-  if (inherits(data, "xts")) {
+  is_xts <- inherits(data, "xts")
+  if (is_xts) {
     melt <- "Series" %in% all.vars(formula)
     data <- fortify.zoo(data, melt = melt, by = formula, reduce = FALSE)
     data <- data[-1]
@@ -80,7 +81,7 @@ aggregate.formula <- function(formula, data, FUN, ..., subset,
   }
   else mf[1L]
   a <- stats::aggregate.data.frame(lhs, mf[-1L], FUN = FUN, ...)
-  if (!is.null(dim(a[length(a)]))) {
+  if (is_xts & !is.null(dim(a[length(a)]))) {
     la <- length(a)
     cn <- colnames(a[,la])
     if (is.null(cn)) cn <- seq_len(ncol(a[,la]))

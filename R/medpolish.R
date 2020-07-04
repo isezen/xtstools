@@ -19,7 +19,8 @@ medpol.default <- function(x, ..., trace.iter = FALSE, na.rm = TRUE)
 #' @export
 medpol.xts <- function(x, ...) {
   if (!is.null(dim(x)) && ncol(x) > 1) {
-    return(do.call(cbind, lapply(x, medpol, ...)))
+    as_list <- utils::getFromNamespace("as.list.xts", "xts")
+    return(do.call(cbind, lapply(as_list(x), medpol.xts, ...)))
   }
   i <- indexx(x, "md") == 229
   y <- x
@@ -56,7 +57,7 @@ na.medpol.matrix <- function(x, ...) {
 #' @describeIn medpol S3 method for xts object
 #' @export
 na.medpol.xts <- function(x, ...) {
-  p <- medpol(x, ...)
-  for (i in 1:ncol(p)) x[is.na(x[,i]), i] <- p[is.na(x[,i]), i]
+  p <- medpol.xts(x, ...)
+  for (i in seq_len(ncol(p))) x[is.na(x[,i]), i] <- p[is.na(x[,i]), i]
   return(x)
 }
