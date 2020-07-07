@@ -6,11 +6,11 @@
 \alias{boxcox.plus}
 \title{BoxCox Transformation}
 \usage{
-boxcox(x, lambda = c(-2, 2), inverse = FALSE, log_10 = FALSE)
+boxcox(x, lambda = c(-2, 2), inverse = FALSE)
 
-boxcox.lambda(x, lambda = c(-2, 2), log_10 = FALSE)
+boxcox.lambda(x, lambda = c(-2, 2))
 
-boxcox.plus(x, plus = c(0, 100), log_10 = FALSE)
+boxcox.plus(x, plus = c(0, 100))
 }
 \arguments{
 \item{x}{A numeric vector-like R object.}
@@ -23,8 +23,7 @@ function.}
 
 \item{inverse}{If \code{TRUE}, inverse boxcox transformation is calculated.}
 
-\item{log_10}{If \code{TRUE}, transformation is accomplished by \code{log10}
-function; otherwise, natural \code{log} function is used.}
+\item{plus}{Interval to be searched for adittive value.}
 }
 \description{
 \code{boxcox} function applies boxcox-transformation to \code{x}. Calculated
@@ -37,6 +36,5 @@ transformation.
              boxcox transformation in the interval of \code{lambda} values.
 
 \code{boxcox.plus} calculates a value to add \code{x} values
-             which maximizes \code{loglik} function for \code{log} or
-             \code{log10} transformation.
+             which maximizes \code{loglik} function for transformation.
 }

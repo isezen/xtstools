@@ -10,7 +10,7 @@
 mode2 <- function(x) {
   modef <- function(x, n = 9, from = min(x, na.rm = TRUE),
                    to = max(x, na.rm = TRUE)) {
-    d <- density(x, n = 2^n, na.rm = TRUE, from = from, to = to)
+    d <- stats::density(x, n = 2^n, na.rm = TRUE, from = from, to = to)
     imax <- which.max(d$y)
     if (imax == 1 | imax == 2^n) {
       d$x[imax]
