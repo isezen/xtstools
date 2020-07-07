@@ -12,6 +12,7 @@
   sep = NULL,
   by = NULL,
   reduce = FALSE,
+  reformat.Index = TRUE,
   ...
 )
 }

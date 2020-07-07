@@ -67,7 +67,8 @@ get_by_factor <- function(index, by) {
 #'               See \code{\link{reduce}}.
 #' @keywords internal
 fortify.zoo <- function(model, data, names = c("Index", "Series", "Value"),
-                        melt = FALSE, sep = NULL, by = NULL, reduce = FALSE, ...) {
+                        melt = FALSE, sep = NULL, by = NULL, reduce = FALSE,
+                        reformat.Index = TRUE, ...) {
   if (!is.null(sep) && !melt) stop("Cannot specify sep if melt = FALSE")
   n <- NROW(model)
   k <- NCOL(model)
@@ -84,7 +85,7 @@ fortify.zoo <- function(model, data, names = c("Index", "Series", "Value"),
   if (melt) {
     by <- get_by_factor(index, by)
     if (length(by) > 0) {
-      index <- by$index
+      if (reformat.Index) index <- by$index
       by <- by$by
     }
     df <- if (k == 1L) {
