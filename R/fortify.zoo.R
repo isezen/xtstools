@@ -31,8 +31,10 @@ get_by_factor <- function(index, by) {
       f <- lapply(by, function(p) {
         # i <- i[[p]] + if (p == "year") 1900 else if (p == "mon") 1 else 0
         i <- indexx(index, p)
-        if (p == "mon")
-          factor(i, levels = unique(i), labels = month.name)
+        if (p == "mon") {
+          ui <- unique(i)
+          factor(i, levels = ui, labels = month.name[ui])
+        }
         else
           factor(i)
       })
@@ -76,6 +78,7 @@ fortify.zoo <- function(model, data, names = c("Index", "Series", "Value"),
   dots <- dots[names(dots) %in% c("row.names", "check.rows",
                                   "check.names", "fix.empty.names",
                                   "stringsAsFactors")]
+  model <- check_object_colnames(model)
   lab <- colnames(model)
   if (is.null(lab)) lab <- rep.int(deparse(substitute(model)), k)
   lab <- make.unique(lab)
