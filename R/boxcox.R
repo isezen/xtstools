@@ -17,6 +17,7 @@
 boxcox <- function(x, lambda = c(-2, 2), inverse = FALSE) {
   inverse <- is.logical(inverse) && isTRUE(inverse)
   xn <- as.numeric(x); non_na <- !is.na(x)
+  xn <- xn[non_na]
   if (inverse) {
     att_lambda <- attr(x, "lambda")
     lambda <- ifelse(is.null(att_lambda), lambda[1], att_lambda)
