@@ -14,9 +14,8 @@ SystemRequirements:
   C++11
 RoxygenNote: 7.1.1
 Depends:
-  R (>= 3.6.0)
+  R (>= 4.0.0)
 Imports:
-  forecast,
   ggplot2,
   Hmisc,
   Rcpp (>= 1.0.4),
@@ -24,4 +23,5 @@ Imports:
   xts,
   zoo
 Suggests:
-  testthat
+  testthat,
+  forecast
