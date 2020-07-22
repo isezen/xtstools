@@ -20,7 +20,7 @@ medpol.default <- function(x, ..., trace.iter = FALSE, na.rm = TRUE)
 medpol.xts <- function(x, ...) {
   if (!is.null(dim(x)) && ncol(x) > 1) {
     as_list <- utils::getFromNamespace("as.list.xts", "xts")
-    return(do.call(cbind, lapply(as_list(x), medpol.xts, ...)))
+    return(do.call(cbind, parallel::mclapply(as_list(x), medpol.xts, ...)))
   }
   i <- indexx(x, "md") == 229
   y <- x
