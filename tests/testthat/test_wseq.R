@@ -1,7 +1,7 @@
 library(testthat)
-library(scalex)
+library(xtstools)
 
-wseq <- getFromNamespace("wseq", "scalex")
+wseq <- getFromNamespace("wseq", "xtstools")
 wseq_test <- function(x, i = 1:length(x), size = 1, clamped = TRUE) {
   w <- floor(size/2)
   r <- sapply(i, function(j) seq(j - w, j + w))
@@ -28,7 +28,7 @@ test_that("wseq", {
         expect_equal(wseq(x, i, s, c), wseq_test(x, i, s, c))
 })
 
-wseq2 <- getFromNamespace("wseq2", "scalex")
+wseq2 <- getFromNamespace("wseq2", "xtstools")
 wseq2_test <- function(x, step_size = 1, wsize = 1, clamped = TRUE) {
   l <- length(x)
   middle <- ceiling(l/2)
