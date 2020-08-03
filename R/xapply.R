@@ -40,60 +40,48 @@ calc_indices <- function(len, step_size, wsize, clamped) {
 #' @param clamped This parameter defines hoe the windows will behave at the
 #'                edges of margin. If \code{TRUE}, windows are extended through
 #'                end and begining of the margins.
-#' @param multiple This argument determines how \code{xapply} function will
-#'                 behave If \code{x} is an array having a dimension equal to
-#'                 3. If \code{multiple = FALSE} and dimension is 3, matrices in
-#'                 each third dimension are estimated as seperate matrices.
-#'                 Default is \code{FALSE}.
 #' @param ... Other arguments passed to \code{FUN}.
 #'
 #' @export
-xapply <- function(x, ...) UseMethod("xapply")
+wapply <- function(x, ...) UseMethod("wapply")
 
-#' @describeIn xapply Default S3 method
+#' @describeIn wapply Default S3 method
 #' @export
-xapply.default <- function(x, MARGIN, FUN, ..., step_size = 1, wsize = 1,
-                           clamped = TRUE, multiple = FALSE) {
-  if (length(dim(x)) == 3 & !multiple) {
-    nc <- getOption("mc.cores", 2L)
-    if (nc > 1) {
-      cl <- parallel::makeCluster(nc, setup_timeout = 0.5)
-      parallel::clusterExport(cl, list("calc_indices"), envir = environment())
-      ret <- parallel::parApply(cl, x, 3, xapply, MARGIN, FUN, ...,
-                                step_size = step_size, wsize = wsize,
-                                clamped = clamped, multiple = multiple)
-      parallel::stopCluster(cl)
-    } else {
-      ret <- apply(x, 3, xapply, MARGIN, FUN, ...,
-                   step_size = step_size, wsize = wsize,
-                   clamped = clamped, multiple = multiple)
-    }
-    rownames(ret) <- rownames(x)
-    ret
-  } else {
-    i <- calc_indices(dim(x)[MARGIN], step_size, wsize, clamped)
-    if (is.matrix(i)) {
-      apply(i, 2, function(j) FUN(slice_array(x, MARGIN, j), ...))
-    } else {
-      sapply(i, function(j) FUN(slice_array(x, MARGIN, j), ...))
-    }
-  }
+wapply.default <- function(x, MARGIN, FUN, ..., step_size = 1, wsize = 1,
+                           clamped = TRUE) {
+  calc_indices <- utils::getFromNamespace("calc_indices", "xtstools")
+  i <- calc_indices(dim(x)[MARGIN], step_size, wsize, clamped)
+  fnc <- function(j) FUN(slice_array(x, MARGIN, j), ...)
+  if (is.matrix(i)) apply(i, 2, fnc) else sapply(i, fnc)
 }
 
-#' @describeIn xapply S3 method for zoo object
+#' @describeIn wapply S3 method for zoo object
+#' @param multiple This argument determines how \code{wapply} function will
+#'                 behave If \code{x} is a \code{zoo} object has columns more
+#'                 than one. If \code{multiple = FALSE} and \code{NCOL(x) > 1},
+#'                 each column is estimated seperately. Default is \code{FALSE}.
 #' @export
-xapply.zoo <- function(x, FUN, ..., step_size = 1, wsize = 1, clamped = TRUE,
-                       multiple = FALSE) {
+wapply.zoo <- function(x, FUN, ..., step_size = 1, wsize = 1, clamped = TRUE,
+                       multiple = FALSE, mclapply = FALSE) {
   if (NCOL(x) > 1 && !multiple) {
     as_list <- utils::getFromNamespace("as.list.xts", "xts")
     lx <- as_list(x)
-    lx <- parallel::mclapply(lx, xapply, FUN,
-                             step_size = step_size,
-                             wsize = wsize, clamped = clamped,
-                             multiple = multiple, ...)
+    if (mclapply) {
+      lx <- parallel::mclapply(lx, wapply, FUN,
+                               step_size = step_size,
+                               wsize = wsize, clamped = clamped,
+                               multiple = multiple, ...)
+    } else {
+      cl <- parallel::makeCluster(getOption("mc.cores", 2L),
+                                  setup_timeout = 0.5)
+      lx <- parallel::parLapply(cl, x, wapply, FUN, step_size = step_size,
+                                wsize = wsize, clamped = clamped,
+                                multiple = multiple, ...)
+      parallel::stopCluster(cl)
+    }
     simplify2array(lx)
   } else {
-    xapply(as.tsarray(x), MARGIN = 1, FUN = FUN, ...,
+    wapply(as.tsarray(x), MARGIN = 1, FUN = FUN, ...,
            step_size = step_size, wsize = wsize, clamped = clamped,
            multiple = multiple)
   }
