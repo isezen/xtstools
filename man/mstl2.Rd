@@ -39,9 +39,20 @@ of the same length as the number of seasonal components.}
 
 \item{iterate}{Number of iterations to use to refine the seasonal component.}
 
-\item{robust}{logical indicating if robust fitting be used in the loess procedure.}
+\item{type}{Type of decomposition. \code{additive} or \code{multiplicative}.}
 
-\item{inverse}{If \code{lambda} is not \code{NULL}, inverse transform th ecomponents.}
+\item{labels}{character of length 4 giving the names of the component
+time-series.}
+
+\item{set.pars}{settings for par(.) when setting up the plot.}
+
+\item{main}{plot main title.}
+
+\item{range.bars}{logical indicating if each plot should have a bar at its
+right side which are of equal heights in user coordinates.}
+
+\item{col.range}{Colour to be used for the range bars, if plotted. Note this
+appears after ... and so cannot be abbreviated.}
 }
 \description{
 Decompose a time series into seasonal, trend and remainder components.

@@ -13,8 +13,7 @@
 #' of the same length as the number of seasonal components.
 #' @param ... Other arguments are passed to \code{\link[stats]{stl}}.
 #' @param iterate Number of iterations to use to refine the seasonal component.
-#' @param robust logical indicating if robust fitting be used in the loess procedure.
-#' @param inverse If \code{lambda} is not \code{NULL}, inverse transform th ecomponents.
+#' @param type Type of decomposition. \code{additive} or \code{multiplicative}.
 #'
 #' @seealso \code{\link[stats]{stl}}, \code{\link[forecast]{mstl}}
 #' @export
@@ -48,7 +47,8 @@ mstl2 <- function(x, lambda = NULL, s.window = 13, ..., iterate = 2,
   attr(st, "seasonal.periods") <- sp
   class(st) <- cls
   if (!is.null(lambda)) attr(st, "lambda") <- lambda
-  ssacf <- function(x) sum(acf(x, na.action = na.omit, plot = FALSE)$acf^2)
+  ssacf <- function(x) sum(stats::acf(x, na.action = stats::na.omit,
+                                      plot = FALSE)$acf^2)
   attr(st, "err") <- sapply(list(mae = mae, rmse = rmse, ssacf = ssacf),
                             function(f) f(st[,"Remainder"]))
   substr(type, 1, 1) <- toupper(substr(type, 1, 1))
@@ -57,7 +57,14 @@ mstl2 <- function(x, lambda = NULL, s.window = 13, ..., iterate = 2,
 }
 
 #' Plot function for mstl object
-#'
+#' @param labels character of length 4 giving the names of the component
+#'               time-series.
+#' @param set.pars settings for par(.) when setting up the plot.
+#' @param main plot main title.
+#' @param range.bars logical indicating if each plot should have a bar at its
+#'                   right side which are of equal heights in user coordinates.
+#' @param col.range Colour to be used for the range bars, if plotted. Note this
+#'                  appears after ... and so cannot be abbreviated.
 #' @rdname mstl2
 #' @export
 plot.mstl <- function(x, labels = colnames(X),
@@ -72,35 +79,34 @@ plot.mstl <- function(x, labels = colnames(X),
   nplot <- ncomp
   if (range.bars)
     mx <- min(apply(rx <- apply(X, 2, range), 2, diff))
-  dev.hold()
-  on.exit(dev.flush())
+  grDevices::dev.hold()
+  on.exit(grDevices::dev.flush())
   if (length(set.pars)) {
-    oldpar <- do.call("par", as.list(names(set.pars)))
-    on.exit(par(oldpar), add = TRUE)
-    do.call("par", set.pars)
+    oldpar <- do.call(graphics::par, as.list(names(set.pars)))
+    on.exit(graphics::par(oldpar), add = TRUE)
+    do.call(graphics::par, set.pars)
   }
   type <- attr(x, "type")
   for (i in 1L:nplot) {
     plot(X[, i], type = if (i < nplot + 1) "l" else "h", xlab = "", ylab = "",
          axes = FALSE)
-    if (i == 1 && is.character(type)) mtext(type, line = 0, adj = 1)
+    if (i == 1 && is.character(type)) graphics::mtext(type, line = 0, adj = 1)
     if (range.bars) {
-      dx <- 1/64 * diff(ux <- par("usr")[1L:2])
+      dx <- 1/64 * diff(ux <- graphics::par("usr")[1L:2])
       y <- mean(rx[, i])
-      rect(ux[2L] - dx, y + mx/2, ux[2L] - 0.4 * dx, y -
-             mx/2, col = col.range, xpd = TRUE)
+      graphics::rect(ux[2L] - dx, y + mx/2, ux[2L] - 0.4 * dx, y -
+                       mx/2, col = col.range, xpd = TRUE)
     }
     if (i == 1 && !is.null(main))
-      title(main, line = 2, outer = par("oma")[3L] > 0)
-    if (i == nplot)
-      abline(h = 0)
-    box()
+      graphics::title(main, line = 2, outer = graphics::par("oma")[3L] > 0)
+    if (i == nplot) graphics::abline(h = 0)
+    graphics::box()
     right <- i %% 2 == 0
-    axis(2, labels = !right)
-    axis(4, labels = right)
-    axis(1, labels = i == nplot)
-    mtext(labels[i], side = 2, 3)
+    graphics::axis(2, labels = !right)
+    graphics::axis(4, labels = right)
+    graphics::axis(1, labels = i == nplot)
+    graphics::mtext(labels[i], side = 2, 3)
   }
-  mtext("time", side = 1, line = 3)
+  graphics::mtext("time", side = 1, line = 3)
   invisible()
 }
