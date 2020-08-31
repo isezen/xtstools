@@ -28,7 +28,7 @@ mstl2 <- function(x, lambda = NULL, s.window = 13, ..., iterate = 2,
   }
   if (type == "multiplicative") {
     if (any(x <= 0))
-      stop("x values havet o higher than zero for multiplicative decomposition")
+      stop("x values have to higher than zero for multiplicative decomposition")
     x <- log(x)
   }
   dots <- utils::modifyList(list(x = x, lambda = NULL, iterate = iterate,
