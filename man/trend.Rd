@@ -9,11 +9,16 @@
 \usage{
 trend(x, ...)
 
-\method{trend}{zoo}(x, ..., fun = c("loess", "lm"), predict = TRUE)
+\method{trend}{zoo}(x, ..., fun = c("loess", "lm", "med"), predict = TRUE)
 
 \method{trend}{data.frame}(x, ..., predict = TRUE)
 
-detrend(x, fun = c("loess", "lm"), ..., type = c("additive", "multiplicative"))
+detrend(
+  x,
+  fun = c("loess", "lm", "med"),
+  ...,
+  type = c("additive", "multiplicative")
+)
 }
 \arguments{
 \item{x}{an xts object}

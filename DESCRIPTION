@@ -20,6 +20,7 @@ Imports:
   Hmisc,
   Rcpp (>= 1.0.4),
   RcppParallel (>= 5.0.1),
+  robfilter,
   xts,
   zoo
 Suggests:

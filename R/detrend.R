@@ -24,7 +24,7 @@ trend <- function(x, ...) UseMethod("trend")
 
 #' @describeIn trend S3 method for \code{zoo} object
 #' @export
-trend.zoo <- function(x, ..., fun = c("loess", "lm"), predict = TRUE) {
+trend.zoo <- function(x, ..., fun = c("loess", "lm", "med"), predict = TRUE) {
   if (!is.character(fun)) stop("fun must be character")
   dts <- zoo::index(x); i <- as.numeric(dts)
   t <- apply(x, 2, function(j)
@@ -43,9 +43,8 @@ trend.data.frame <- function(x, ..., predict = TRUE) {
   return(if (predict) cbind(x[,"index", drop = FALSE], as.data.frame(t)) else t)
 }
 
-trend_internal <- function(x, y, ..., fun = c("loess", "lm"), predict = TRUE,
-                           type = c("additive", "multiplicative"),
-                           control = stats::loess.control(trace.hat = "a")) {
+trend_internal <- function(x, y, ..., fun = c("loess", "lm", "med"), predict = TRUE,
+                           type = c("additive", "multiplicative")) {
   fun <- match.arg(fun)
   type <- match.arg(type)
   if (type == "multiplicative") {
@@ -54,10 +53,31 @@ trend_internal <- function(x, y, ..., fun = c("loess", "lm"), predict = TRUE,
     y <- log(y)
   }
   data <- data.frame(x = x, y = y)
-  model <- if (fun == "lm") stats::lm(y ~ x, data, ...)
-  else stats::loess(y ~ x, data, ..., control = control)
+  if (fun == "lm") {
+    model <- stats::lm(y ~ x, data, ...)
+  } else if (fun == "loess") {
+    dots <- list(...)
+    if ("width" %in% names(dots)) {
+      dots$span <- dots$width/length(zoo::na.trim(y))
+      dots$width <- NULL
+    }
+    dots <- modifyList(dots,
+                       list(formula = y ~x, family = "symmetric",
+                            control = stats::loess.control(trace.hat = "a")))
+    model <- do.call(stats::loess, dots)
+  } else if (fun == "med") {
+    y <- as.vector(y)
+    dots <- modifyList(list(...), list(y = y, width = 0.75 * length(y)))
+    capture.output(model <- do.call(robfilter::med.filter, dots))
+  } else {
+    stop("Undefined function")
+  }
   if (predict) {
-    df <- stats::predict(model, newdata = data)
+    df <- if (fun == "med") {
+      model$level[,1]
+    } else {
+      stats::predict(model, newdata = data)
+    }
     if (type == "multiplicative") df <- exp(df)
   } else df <- model
   df
@@ -65,7 +85,7 @@ trend_internal <- function(x, y, ..., fun = c("loess", "lm"), predict = TRUE,
 
 #' @rdname trend
 #' @export
-detrend <- function(x, fun = c("loess", "lm"), ...,
+detrend <- function(x, fun = c("loess", "lm", "med"), ...,
                     type = c("additive", "multiplicative")) {
   if (!inherits(x, "zoo")) stop("x must be an zoo or xts object")
   t <- trend(x, fun = fun, ..., predict = TRUE, type = type)
