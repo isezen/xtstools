@@ -61,13 +61,12 @@ trend_internal <- function(x, y, ..., fun = c("loess", "lm", "med"), predict = T
       dots$span <- dots$width/length(zoo::na.trim(y))
       dots$width <- NULL
     }
-    dots <- modifyList(dots,
-                       list(formula = y ~x, family = "symmetric",
-                            control = stats::loess.control(trace.hat = "a")))
+    dots <- modifyList(list(formula = y ~x, family = "symmetric",
+                            control = stats::loess.control(trace.hat = "a")), dots)
     model <- do.call(stats::loess, dots)
   } else if (fun == "med") {
     y <- as.vector(y)
-    dots <- modifyList(list(...), list(y = y, width = 0.75 * length(y)))
+    dots <- modifyList(list(y = y, width = 0.75 * length(y)), list(...))
     capture.output(model <- do.call(robfilter::med.filter, dots))
   } else {
     stop("Undefined function")
@@ -87,6 +86,7 @@ trend_internal <- function(x, y, ..., fun = c("loess", "lm", "med"), predict = T
 #' @export
 detrend <- function(x, fun = c("loess", "lm", "med"), ...,
                     type = c("additive", "multiplicative")) {
+  type <- match.arg(type)
   if (!inherits(x, "zoo")) stop("x must be an zoo or xts object")
   t <- trend(x, fun = fun, ..., predict = TRUE, type = type)
   if (type == "additive") x - t else x/t
