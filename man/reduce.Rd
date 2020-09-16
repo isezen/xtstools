@@ -9,11 +9,11 @@
 \usage{
 reduce(x, ..., which.i = FALSE)
 
-\method{reduce}{zoo}(x, merge = TRUE, which.i = FALSE, ...)
+\method{reduce}{zoo}(x, merge = TRUE, which.i = FALSE, on, ...)
 
-\method{reduce}{data.frame}(x, merge = TRUE, which.i = FALSE, ...)
+\method{reduce}{data.frame}(x, merge = TRUE, which.i = FALSE, on, ...)
 
-\method{reduce}{formula}(formula, data, which.i = FALSE, ...)
+\method{reduce}{formula}(formula, data, which.i = FALSE, on, ...)
 }
 \arguments{
 \item{x}{An \code{xts}/\code{zoo}/\code{data.frame} object.}
@@ -24,6 +24,9 @@ reduce(x, ..., which.i = FALSE)
 
 \item{merge}{if \code{merge = TRUE} and \code{x} has multiple \code{numeric}
 columns, the result indices are merged.}
+
+\item{on}{Reducing period. If missing, period will be set to second smallest
+period in the series.}
 
 \item{formula}{Formula to be evaluated.}
 

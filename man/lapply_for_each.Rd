@@ -3,9 +3,12 @@
 \name{lapply_for_each}
 \alias{lapply_for_each}
 \alias{lapply_for_each_month}
+\alias{lapply_for_each_part}
 \title{Apply function for each same months in a zoo series}
 \usage{
 lapply_for_each_month(x, FUN, ...)
+
+lapply_for_each_part(x, FUN, ..., npart = 52)
 }
 \arguments{
 \item{x}{A \code{zoo} series}
