@@ -55,5 +55,5 @@ lapply_for_each_part <- function(x, FUN, ..., npart = 52) {
     # TODO: TEMPORARY SOLUTION --------
     lx <- lapply(l2, FUN, ...)
   # }
-  return(lx)
+  return(list(results = lx, parts = l2))
 }
