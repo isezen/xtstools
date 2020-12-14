@@ -105,15 +105,19 @@ fortify.zoo <- function(model, data, names = c("Index", "Series", "Value"),
       i <- reduce.zoo(model, FALSE, TRUE)
       df <- df[do.call(c, mapply(`+`, i, cumsum(c(0, rep(n, k - 1))))), ]
     }
+    # browser()
     ns <- 1
     if (!is.null(sep)) {
-      spl <- strsplit(as.character(df[[2L]]), ".", fixed = TRUE)
-      ns <- ncol(spl)
+      sep <- if (is.character(sep)) sep[1] else "."
+      spl <- strsplit(as.character(df[[2L]]), sep, fixed = TRUE)
+      ns <- len(spl[[1]])
       df <- data.frame(df[1L], do.call("rbind", spl), df[3:ncol(df)])
     }
     nl <- length(nm)
-    un <- make.unique(rep_len(nm[2:(ns + 1)], ns), sep = "")
-    names(df)[c(1, 2:(ns + 1), ncol(df))] <- c(nm[1L], un, nm[nl])
+    # un <- make.unique(rep_len(nm[2:(ns + 1)], ns), sep = "")
+    un <- make.unique(rep_len(nm[-c(1L, nl)], ncol(df) - 1L), sep = "")
+    names(df) <- c(nm[1L], un[-1L], nm[nl])
+    # names(df)[c(1, 2:(ns + 1), ncol(df))] <- c(nm[1L], un, nm[nl])
   } else {
     if (reduce) {
       i <- reduce.zoo(model, TRUE, TRUE)
