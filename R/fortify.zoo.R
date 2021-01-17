@@ -115,8 +115,13 @@ fortify.zoo <- function(model, data, names = c("Index", "Series", "Value"),
     }
     nl <- length(nm)
     # un <- make.unique(rep_len(nm[2:(ns + 1)], ns), sep = "")
-    un <- make.unique(rep_len(nm[-c(1L, nl)], ncol(df) - 1L), sep = "")
-    names(df) <- c(nm[1L], un[-1L], nm[nl])
+    if (ns > 1) {
+      un <- make.unique(rep_len(nm[-c(1L, nl)], ncol(df) - 1L), sep = "")
+      names(df) <- c(nm[1L], un[-1L], nm[nl])
+    } else {
+      un <- make.unique(rep_len(nm[-c(1L, nl)], ncol(df) - 2L), sep = "")
+      names(df) <- c(nm[1L], un, nm[nl])
+    }
     # names(df)[c(1, 2:(ns + 1), ncol(df))] <- c(nm[1L], un, nm[nl])
   } else {
     if (reduce) {
