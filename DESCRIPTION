@@ -9,14 +9,14 @@ License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 LinkingTo: Rcpp, RcppParallel
-SystemRequirements:
-  GNU make,
-  C++11
-RoxygenNote: 7.1.1
+SystemRequirements: GNU make
+RoxygenNote: 7.3.1
 Depends:
   R (>= 4.0.0)
 Imports:
+  stats,
   ggplot2,
+  lubridate,
   Hmisc,
   Rcpp (>= 1.0.4),
   RcppParallel (>= 5.0.1),
@@ -26,3 +26,4 @@ Imports:
 Suggests:
   testthat,
   forecast
+Roxygen: list(markdown = TRUE)

@@ -1,7 +1,7 @@
 #' Check object colnames
 #'
-#' If column names of the object is not set, column names of the \code{object}
-#' are set by \code{object} names. If the \code{object} does not have dimension,
+#' If column names of the object is not set, column names of the `object`
+#' are set by `object` names. If the `object` does not have dimension,
 #' it's dimension set as 1 column.
 #'
 #' @keywords internal

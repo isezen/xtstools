@@ -1,8 +1,9 @@
 #' Apply function for each same months in a zoo series
 #'
-#' @param x A \code{zoo} series
+#' @param x A `zoo` series
 #' @param FUN a function to apply.
 #' @param ... Other arguments passed to function.
+#' @param npart Number of parts to split the data.
 #'
 #' @name lapply_for_each
 NULL

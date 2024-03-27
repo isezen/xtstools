@@ -12,6 +12,6 @@ mode2(x)
 \description{
 If \code{x} is a double-precision numeric vector, function calculates peak
 (maximum) of Kernel Density Estimation of \code{x} values. If \code{x} is
-integer or another R object, it's calcualted highest number of occurrences
+integer or another R object, it's calculated highest number of occurrences
 in \code{x}.
 }

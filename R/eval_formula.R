@@ -3,8 +3,8 @@
 #' This function evaluates formula on data and returns evaluated data.
 #'
 #' @param formula Formula to be evaluated
-#' @param data \code{data.frame} for the formula
-#' @param ... Other params to be passed to \code{model.frame}
+#' @param data `data.frame` for the formula
+#' @param ... Other params to be passed to `model.frame`
 #' @return Evaluated formula result
 eval_formula <- function(formula, data, ...) {
   if (formula[[2L]] == ".") {

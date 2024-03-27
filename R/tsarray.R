@@ -1,13 +1,13 @@
-#' Convert time-series object to a \code{tsarray} object
+#' Convert time-series object to a `tsarray` object
 #'
-#' Convert time-series object to a \code{tsarray} object by longest frequency of
+#' Convert time-series object to a `tsarray` object by longest frequency of
 #' time-series object.
 #'
-#' @param x a \link{ts}, \code{\link[zoo:zoo]{zoo}}  or \link{xts} object
+#' @param x a [ts], [zoo::zoo()]  or [xts] object
 #' @param f Frequency (an integer value) or convert to matrix criteria for
-#'          the object. Possible values are \code{(\%Y, \%m, \%d, \%H, \%M)}
+#'          the object. Possible values are `(\%Y, \%m, \%d, \%H, \%M)`
 #'          for year, month, day, hour and minute, respectively.
-#' @return A \code{[tsarray]} object
+#' @return A `[tsarray]` object
 #'
 #' @export
 as.tsarray <- function(x, ...) UseMethod("as.tsarray")
@@ -73,7 +73,7 @@ reduce_join <- function(t, f) {
   df <- Reduce(function(...) merge_df(..., by = "rn", all = TRUE), y)
   colnames(df)[-1] <- unique(idx)
   df <- df[order(df$rn),]
-  df$rn <- not_eq_parts(df$rn)
+  df$rn <- not_eq_parts(format(df$rn, usetz = TRUE))
   df
 }
 
@@ -128,7 +128,9 @@ as.tsarray.zoo <- function(x, ...) {
   return(m)
 }
 
-as.xts.tsarray <- function(x) {
+#' @keywords internal
+#' @export
+as.xts.tsarray <- function(x, ...) {
   from <- attr(x, "from")
   if (!is.null(from$class)) {
     if ("ts" %in% from$class) {
@@ -181,7 +183,10 @@ as.zoo.tsarray <- function(x) {
   stop("Cannot convert to zoo/xts object")
 }
 
-as.ts.tsarray <- function(x) {
+#' @export
+#' @keywords internal
+#' @importFrom stats as.ts
+as.ts.tsarray <- function(x, ...) {
   from <- attr(x, "from")
   if (!is.null(from$class)) {
     t <- attr(x, "tsp2")

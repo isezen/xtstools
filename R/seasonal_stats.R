@@ -1,9 +1,9 @@
 #' Summary statistics on a vector
 #'
 #' @param x A numveric vector.
-#' @param B number of bootstrap resamples for \code{mean_cl_boot}.
+#' @param B number of bootstrap resamples for `mean_cl_boot`.
 #' @param q 2 quantiles to calculate.
-#' @param na.rm Do you want to remove \code{NA}'s? Default is \code{TRUE}.
+#' @param na.rm Do you want to remove `NA`'s? Default is `TRUE`.
 #' @param ... Other parameters passed to the functions.
 #' @rdname summary_stats
 #' @export
@@ -31,15 +31,15 @@ median_quantile <- function(x, q = c(0.25, 0.75), na.rm = TRUE) {
 #'
 #' Calculate daily, weekly, annual means over hours and long term means over days.
 #'
-#' @param x An hourly \code{xts} object
-#' @param FUNS Functions to be applied over \code{x}
+#' @param x An hourly `xts` object
+#' @param FUNS Functions to be applied over `x`
 #' @param ... Unused for now.
 #'
 #' @import ggplot2
 #' @export
 seasonal_stats <- function(x, ...) UseMethod("seasonal_stats")
 
-#' @describeIn seasonal_stats S3 Method for \code{xts}
+#' @describeIn seasonal_stats S3 Method for `xts`
 #' @export
 seasonal_stats.xts <- function(x, FUNS = c("mean_cl_boot", "median_quantile"),
                                ...) {

@@ -13,14 +13,14 @@ as.tsarray(x, ...)
 \method{as.tsarray}{zoo}(x, ...)
 }
 \arguments{
-\item{x}{a \link{ts}, \code{\link[zoo:zoo]{zoo}}  or \link{xts} object}
+\item{x}{a \link{ts}, \code{\link[zoo:zoo]{zoo::zoo()}}  or \link{xts} object}
 
 \item{f}{Frequency (an integer value) or convert to matrix criteria for
-the object. Possible values are \code{(\%Y, \%m, \%d, \%H, \%M)}
+the object. Possible values are \verb{(\\\%Y, \\\%m, \\\%d, \\\%H, \\\%M)}
 for year, month, day, hour and minute, respectively.}
 }
 \value{
-A \code{[tsarray]} object
+A \verb{[tsarray]} object
 }
 \description{
 Convert time-series object to a \code{tsarray} object by longest frequency of
@@ -28,9 +28,9 @@ time-series object.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{ts}: S3 method for ts object
+\item \code{as.tsarray(ts)}: S3 method for ts object
 
-\item \code{zoo}: S3 method for zoo object
+\item \code{as.tsarray(zoo)}: S3 method for zoo object
+
 }}
-
 \keyword{internal}

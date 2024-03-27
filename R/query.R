@@ -1,23 +1,23 @@
 #' Subset POSIXt/zoo/xts objects
 #'
-#' Return subsets of \code{POSIXt}, \code{zoo} and \code{xts} objects
-#' which meet \code{query} condition.
+#' Return subsets of `POSIXt`, `zoo` and `xts` objects
+#' which meet `query` condition.
 #'
-#' @param x A \code{POSIXt}, \code{zoo} and \code{xts} objects
+#' @param x A `POSIXt`, `zoo` and `xts` objects
 #' @param query Condition to query object
-#' @param which.i If \code{TRUE}, indices are returned
+#' @param which.i If `TRUE`, indices are returned
 #' @param ... Unused
 #' @examples
 #' library(xts)
 #' data(sample_matrix)
 #' x <- as.xts(sample_matrix, dateFormat="Date")
 #' query(x, "month == 10")
-#' @seealso \link[base]{subset}
+#' @seealso [subset][base::subset]
 #'
 #' @export
 query <- function(x, query, which.i, ...) UseMethod("query")
 
-#' @describeIn query S3 method for class \code{POSIXt}
+#' @describeIn query S3 method for class `POSIXt`
 #' @export
 query.POSIXt <- function(x, query, which.i = FALSE, ...) {
   r <- if (missing(query)) {
@@ -37,7 +37,7 @@ query.POSIXt <- function(x, query, which.i = FALSE, ...) {
   if (which.i) r else x[r]
 }
 
-#' @describeIn query S3 method for class \code{zoo}
+#' @describeIn query S3 method for class `zoo`
 #' @export
 query.zoo <- function(x, query, which.i = FALSE, ...) {
   i <- if (inherits(x, "xts")) index.xts(x) else index.zoo(x)

@@ -5,9 +5,9 @@
 #' excluded before medpolish and included after medpolish.
 #'
 #' @param x A numeric matrix or xts object
-#' @param ... Other params passed to \code{\link[stats]{medpolish}}
+#' @param ... Other params passed to [stats::medpolish()]
 #'
-#' @seealso \code{\link[stats]{medpolish}}
+#' @seealso [stats::medpolish()]
 #' @export
 medpol <- function(x, ...) UseMethod("medpol")
 
@@ -42,7 +42,7 @@ medpol.xts <- function(x, ...) {
 }
 
 
-#' @description \code{na.medpolish} fills NA's by medpolish method.
+#' @description `na.medpolish` fills NA's by medpolish method.
 #' @rdname medpol
 #' @export
 na.medpol <- function(x, ...) UseMethod("na.medpol")

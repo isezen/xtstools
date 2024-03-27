@@ -31,17 +31,17 @@ calc_indices <- function(len, step_size, wsize, clamped) {
 #'               columns, c(1, 2) indicates rows and columns. Where X has named
 #'               dimnames, it can be a character vector selecting dimension
 #'               names.
-#' @param FUN the function to be applied. See \code{\link{apply}}.
+#' @param FUN the function to be applied. See [apply()].
 #' @param step_size Step size of moving window over margin. This value can be a
 #'                  vector. Each value in the vector represents step size for a
 #'                  new window in previous window.
-#' @param wsize Window size for each \code{step_size}. This value can be a
+#' @param wsize Window size for each `step_size`. This value can be a
 #'              vector. Each value in the vector represents window size for a
 #'              new window in previous window.
-#' @param clamped This parameter defines hoe the windows will behave at the
-#'                edges of margin. If \code{TRUE}, windows are extended through
+#' @param clamped This parameter defines how the windows will behave at the
+#'                edges of margin. If `TRUE`, windows are extended through
 #'                end and begining of the margins.
-#' @param ... Other arguments passed to \code{FUN}.
+#' @param ... Other arguments passed to `FUN`.
 #'
 #' @export
 wapply <- function(x, ...) UseMethod("wapply")
@@ -61,13 +61,13 @@ wapply.default <- function(x, MARGIN, FUN, ..., step_size = 1, wsize = 1,
 }
 
 #' @describeIn wapply S3 method for zoo object
-#' @param multiple This argument determines how \code{wapply} function will
-#'                 behave If \code{x} is a \code{zoo} object has columns more
-#'                 than one. If \code{multiple = FALSE} and \code{NCOL(x) > 1},
-#'                 each column is estimated seperately. Default is \code{FALSE}.
-#' @param mclapply If intented to use \code{\link[parallel]{mclapply}}, set
-#'                 \code{TRUE}. Otherwise, \code{\link[parallel]{parLapply}} is
-#'                 used. Default is \code{TRUE}.
+#' @param multiple This argument determines how `wapply` function will
+#'                 behave If `x` is a `zoo` object has columns more
+#'                 than one. If `multiple = FALSE` and `NCOL(x) > 1`,
+#'                 each column is estimated separately. Default is `FALSE`.
+#' @param mclapply If intented to use [parallel::mclapply()], set
+#'                 `TRUE`. Otherwise, [parallel::parLapply()] is
+#'                 used. Default is `TRUE`.
 #' @export
 wapply.zoo <- function(x, FUN, ..., step_size = 1, wsize = 1, clamped = TRUE,
                        multiple = FALSE, mclapply = TRUE) {

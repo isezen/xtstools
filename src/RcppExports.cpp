@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // wseq_cpp
 SEXP wseq_cpp(const SEXP& x, int i, int size, bool clamped);
 RcppExport SEXP _xtstools_wseq_cpp(SEXP xSEXP, SEXP iSEXP, SEXP sizeSEXP, SEXP clampedSEXP) {

@@ -16,6 +16,8 @@ lapply_for_each_part(x, FUN, ..., npart = 52)
 \item{FUN}{a function to apply.}
 
 \item{...}{Other arguments passed to function.}
+
+\item{npart}{Number of parts to split the data.}
 }
 \description{
 Apply function for each same months in a zoo series

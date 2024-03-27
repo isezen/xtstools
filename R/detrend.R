@@ -1,28 +1,28 @@
 #' (de)trend xts object
 #'
-#' \code{trend} method creates model object for \code{loess} or \code{lm}
-#' methods if \code{predict} is \code{FALSE}; otherwise predicted values are
+#' `trend` method creates model object for `loess` or `lm`
+#' methods if `predict` is `FALSE`; otherwise predicted values are
 #' calculated.
-#' \code{detrend} method removes long term trend from \code{xts} or
-#' \code{data.frame} object by \code{loess} or \code{lm} methods.
+#' `detrend` method removes long term trend from `xts` or
+#' `data.frame` object by `loess` or `lm` methods.
 #' Multiple series are accepted and trends are calculated for each column of
 #' objects.
 #'
 #' @param x an xts object
-#' @param fun \code{"loess"} or \code{"lm"} string to choose the model.
+#' @param fun `"loess"` or `"lm"` string to choose the model.
 #'            Can be abbreviated up to first two characters.
-#' @param predict If \code{TRUE} predicted results are returned.
-#' @param ... other parameters passed to \code{loess} or \code{lm} methods.
-#' @param type De-trending type. \code{additive} or \code{multiplicative}.
-#' @return For \code{trend} method, if \code{predict} is \code{FALSE}, model
+#' @param predict If `TRUE` predicted results are returned.
+#' @param ... other parameters passed to `loess` or `lm` methods.
+#' @param type De-trending type. `additive` or `multiplicative`.
+#' @return For `trend` method, if `predict` is `FALSE`, model
 #'         object is returned; otherwise predicted values return. For
-#'         \code{detrend} method, trend is removed from \code{x} object and
+#'         `detrend` method, trend is removed from `x` object and
 #'         de-trended object with same class is returned.
 #' @rdname trend
 #' @export
 trend <- function(x, ...) UseMethod("trend")
 
-#' @describeIn trend S3 method for \code{zoo} object
+#' @describeIn trend S3 method for `zoo` object
 #' @export
 trend.zoo <- function(x, ..., fun = c("loess", "lm", "med"), predict = TRUE) {
   if (!is.character(fun)) stop("fun must be character")
@@ -32,7 +32,7 @@ trend.zoo <- function(x, ..., fun = c("loess", "lm", "med"), predict = TRUE) {
   return(if (predict) xts::xts(t, order.by = dts) else t)
 }
 
-#' @describeIn trend S3 method for \code{data.frame} object
+#' @describeIn trend S3 method for `data.frame` object
 #' @export
 trend.data.frame <- function(x, ..., predict = TRUE) {
   swi <- startsWith(colnames(x), "index")
@@ -43,6 +43,7 @@ trend.data.frame <- function(x, ..., predict = TRUE) {
   return(if (predict) cbind(x[,"index", drop = FALSE], as.data.frame(t)) else t)
 }
 
+#' @importFrom utils capture.output modifyList
 trend_internal <- function(x, y, ..., fun = c("loess", "lm", "med"), predict = TRUE,
                            type = c("additive", "multiplicative")) {
   fun <- match.arg(fun)
@@ -61,13 +62,13 @@ trend_internal <- function(x, y, ..., fun = c("loess", "lm", "med"), predict = T
       dots$span <- dots$width/length(zoo::na.trim(y))
       dots$width <- NULL
     }
-    dots <- modifyList(list(formula = y ~x, family = "symmetric",
-                            control = stats::loess.control(trace.hat = "a")), dots)
+    dots <- utils::modifyList(list(formula = y ~x, family = "symmetric",
+                              control = stats::loess.control(trace.hat = "a")), dots)
     model <- do.call(stats::loess, dots)
   } else if (fun == "med") {
     y <- as.vector(y)
-    dots <- modifyList(list(y = y, width = 0.75 * length(y)), list(...))
-    capture.output(model <- do.call(robfilter::med.filter, dots))
+    dots <- utils::modifyList(list(y = y, width = 0.75 * length(y)), list(...))
+    utils::capture.output(model <- do.call(robfilter::med.filter, dots))
   } else {
     stop("Undefined function")
   }

@@ -9,9 +9,7 @@ indexx(x, unit)
 \arguments{
 \item{x}{\code{POSIXt}, \code{xts} or \code{zoo} object.}
 
-\item{unit}{Unit as character vector. Possible values are \code{sec, min,
-hour, mday, mon, year, wday, yday, isdst} and \code{yearmon, wdayhour, md,
-mdh, yhour, index}.}
+\item{unit}{Unit as character vector. Possible values are \verb{sec, min, hour, mday, mon, year, wday, yday, isdst} and \verb{yearmon, wdayhour, md, mdh, yhour, index}.}
 }
 \description{
 Extreact various date properties from \code{POSIXt}, \code{xts} or \code{zoo}

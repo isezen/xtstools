@@ -27,11 +27,11 @@ which meet \code{query} condition.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{POSIXt}: S3 method for class \code{POSIXt}
+\item \code{query(POSIXt)}: S3 method for class \code{POSIXt}
 
-\item \code{zoo}: S3 method for class \code{zoo}
+\item \code{query(zoo)}: S3 method for class \code{zoo}
+
 }}
-
 \examples{
 library(xts)
 data(sample_matrix)
@@ -39,5 +39,5 @@ x <- as.xts(sample_matrix, dateFormat="Date")
 query(x, "month == 10")
 }
 \seealso{
-\link[base]{subset}
+\link[base:subset]{subset}
 }

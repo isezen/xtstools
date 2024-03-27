@@ -73,5 +73,5 @@ Aggregate \code{xts} object by month, day, year etc...
 \details{
 Valid values for the argument \code{on} include:
 "sec", "min", "hour", "mday", "mon", "year", "wday", "yday", "yhour", "isdst".
-\code{agg.*} functions are wrapper functions for overlapping time periods
+\verb{agg.*} functions are wrapper functions for overlapping time periods
 }

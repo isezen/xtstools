@@ -21,7 +21,7 @@ na.medpol(x, ...)
 \arguments{
 \item{x}{A numeric matrix or xts object}
 
-\item{...}{Other params passed to \code{\link[stats]{medpolish}}}
+\item{...}{Other params passed to \code{\link[stats:medpolish]{stats::medpolish()}}}
 }
 \description{
 Fits an additive model (twoway decomposition) using Tukey's median
@@ -32,13 +32,16 @@ excluded before medpolish and included after medpolish.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{xts}: S3 method for xts object
+\item \code{medpol(xts)}: S3 method for xts object
 
-\item \code{matrix}: S3 method for matrix
-
-\item \code{xts}: S3 method for xts object
 }}
+\section{Functions}{
+\itemize{
+\item \code{na.medpol(matrix)}: S3 method for matrix
 
+\item \code{na.medpol(xts)}: S3 method for xts object
+
+}}
 \seealso{
-\code{\link[stats]{medpolish}}
+\code{\link[stats:medpolish]{stats::medpolish()}}
 }

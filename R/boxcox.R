@@ -1,18 +1,18 @@
 #' BoxCox Transformation
 #'
-#' \code{boxcox} function applies boxcox-transformation to \code{x}. Calculated
-#' best \code{lambda} value for the transformation is attached to \code{x} as
-#' attribute. (See: \code{attr(x, "lambda")}). If \code{x} contains any value
-#' equal or less than \code{0}, it will be set to \code{NA} for the sake of
+#' `boxcox` function applies boxcox-transformation to `x`. Calculated
+#' best `lambda` value for the transformation is attached to `x` as
+#' attribute. (See: `attr(x, "lambda")`). If `x` contains any value
+#' equal or less than `0`, it will be set to `NA` for the sake of
 #' transformation.
 #'
 #' @param x A numeric vector-like R object.
-#' @param lambda If \code{lambda} is a single value, transformation is
+#' @param lambda If `lambda` is a single value, transformation is
 #'               accomplished using this value. If a 2-length vector, best
-#'               lambda value is calculated for transformation. \code{lambda}
-#'               always must be 2-length vector for \code{boxcox.lambda}
+#'               lambda value is calculated for transformation. `lambda`
+#'               always must be 2-length vector for `boxcox.lambda`
 #'               function.
-#' @param inverse If \code{TRUE}, inverse boxcox transformation is calculated.
+#' @param inverse If `TRUE`, inverse boxcox transformation is calculated.
 #' @export
 boxcox <- function(x, lambda = c(-2, 2), inverse = FALSE) {
   inverse <- is.logical(inverse) && isTRUE(inverse)
@@ -35,8 +35,8 @@ boxcox <- function(x, lambda = c(-2, 2), inverse = FALSE) {
   x
 }
 
-#' @description \code{boxcox.lambda} function calculates best lambda value for
-#'              boxcox transformation in the interval of \code{lambda} values.
+#' @description `boxcox.lambda` function calculates best lambda value for
+#'              boxcox transformation in the interval of `lambda` values.
 #' @rdname boxcox
 #' @export
 boxcox.lambda <- function(x, lambda = c(-2, 2)) {
@@ -52,8 +52,8 @@ boxcox.lambda <- function(x, lambda = c(-2, 2)) {
                   maximum = TRUE, tol = sqrt(.Machine$double.eps))$maximum
 }
 
-#' @description \code{boxcox.plus} calculates a value to add \code{x} values
-#'              which maximizes \code{loglik} function for transformation.
+#' @description `boxcox.plus` calculates a value to add `x` values
+#'              which maximizes `loglik` function for transformation.
 #' @param plus Interval to be searched for adittive value.
 #' @rdname boxcox
 #' @export

@@ -1,10 +1,10 @@
 #' Alone Value Index
 #'
 #' This function returns values/indices of values between at least two
-#' \code{NA}'s.
+#' `NA`'s.
 #'
-#' @param x An R object (\code{vector}, \code{matrix} or \code{data.frame})
-#' @param flat If \code{x} is a matrix-like object, it's interpreted as vector
+#' @param x An R object (`vector`, `matrix` or `data.frame`)
+#' @param flat If `x` is a matrix-like object, it's interpreted as vector
 #'             and indices are returned according to this.
 #' @param ... Unused.
 #' @export
@@ -24,11 +24,11 @@ alone.default <- function(x, flat = FALSE, ...) {
   return(v)
 }
 
-#' @describeIn alone S3 method for \code{formula} interface
+#' @describeIn alone S3 method for `formula` interface
 #' @param formula a formula, such as y ~ x or cbind(y1, y2) ~ x1 + x2, where
 #'                the y variables are numeric data to be split into groups
 #'                according to the grouping x variables (usually factors).
-#' @param data A \code{data.frame}
+#' @param data A `data.frame`
 #' @export
 alone.formula <- function(formula, data, ...) {
   data[alone_index(formula, data), ]
@@ -60,11 +60,11 @@ alone_index.zoo <- function(x, flat = FALSE, ...) {
   alone_index(zoo::coredata(x), flat)
 }
 
-#' @describeIn alone S3 method for \code{formula} interface
+#' @describeIn alone S3 method for `formula` interface
 #' @param formula a formula, such as y ~ x or cbind(y1, y2) ~ x1 + x2, where
 #'                the y variables are numeric data to be split into groups
 #'                according to the grouping x variables (usually factors).
-#' @param data A \code{data.frame}
+#' @param data A `data.frame`
 #' @export
 alone_index.formula <- function(formula, data, ...) {
   a <- eval_formula(formula, data, na.action = stats::na.pass)

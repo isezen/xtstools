@@ -1,24 +1,24 @@
 #' Aggregate xts object
 #'
-#' Aggregate \code{xts} object by month, day, year etc...
+#' Aggregate `xts` object by month, day, year etc...
 #'
-#' @details Valid values for the argument \code{on} include:
+#' @details Valid values for the argument `on` include:
 #' "sec", "min", "hour", "mday", "mon", "year", "wday", "yday", "yhour", "isdst".
-#' \code{agg.*} functions are wrapper functions for overlapping time periods
+#' `agg.*` functions are wrapper functions for overlapping time periods
 #'
-#' @param x,data An \code{xts} object
+#' @param x,data An `xts` object
 #' @param by A character string speficying overlapping time indexing to apply
-#'           the \code{FUN}
+#'           the `FUN`
 #' @param formula a formula, such as y ~ x or cbind(y1, y2) ~ x1 + x2, where
 #'                the y variables are numeric data to be split into groups
 #'                according to the grouping x variables (usually factors).
-#' @param FUN an argument of type \code{function}
+#' @param FUN an argument of type `function`
 #' @param subset an optional vector specifying a subset of observations to
 #'               be used.
 #' @param na.action a function which indicates what should happen when the
 #'                  data contain NA values. The default is to ignore missing
 #'                  values in the given variables.
-#' @param ... additional arguments for \code{FUN}
+#' @param ... additional arguments for `FUN`
 #' @param wsize Window size to to take into account
 #' @rdname aggregate.xts
 aggregate.xts <- function(x, by, FUN, ..., wsize = 0) {

@@ -1,8 +1,8 @@
 #' Slice Array
 #'
-#' Slice array by \code{margin} and margin \code{value} .
+#' Slice array by `margin` and margin `value` .
 #'
-#' @param x An \code{array}
+#' @param x An `array`
 #' @param margin Margin for slicing.
 #' @param value Margin value for slicing.
 #' @param drop Drop results?

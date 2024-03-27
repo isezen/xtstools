@@ -21,6 +21,6 @@ Calculate daily, weekly, annual means over hours and long term means over days.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{xts}: S3 Method for \code{xts}
-}}
+\item \code{seasonal_stats(xts)}: S3 Method for \code{xts}
 
+}}

@@ -1,27 +1,27 @@
 #' Reduce xts/zoo object
 #'
-#' This function reduces \code{xts}/\code{zoo}/\code{data.frame} object by the
-#' second smallest period in the series if \code{length} of series is greater
-#' than a specified threshold. \code{data.frame} must have at least one
-#' \code{POSIXt} and one \code{numeric} column. If \code{data.frame} has a
-#' \code{factor} column, evaluation is done by considering \code{factor} levels.
+#' This function reduces `xts`/`zoo`/`data.frame` object by the
+#' second smallest period in the series if `length` of series is greater
+#' than a specified threshold. `data.frame` must have at least one
+#' `POSIXt` and one `numeric` column. If `data.frame` has a
+#' `factor` column, evaluation is done by considering `factor` levels.
 #'
-#' @param x An \code{xts}/\code{zoo}/\code{data.frame} object.
+#' @param x An `xts`/`zoo`/`data.frame` object.
 #' @param formula Formula to be evaluated.
-#' @param data \code{data.frame} for the formula.
-#' @param merge if \code{merge = TRUE} and \code{x} has multiple \code{numeric}
+#' @param data `data.frame` for the formula.
+#' @param merge if `merge = TRUE` and `x` has multiple `numeric`
 #'              columns, the result indices are merged.
-#' @param which.i If \code{TRUE}, returns indices.
+#' @param which.i If `TRUE`, returns indices.
 #' @param on Reducing period. If missing, period will be set to second smallest
 #'           period in the series.
 #' @param ... Unused
-#' @return A list of indices/values of \code{xts}/\code{zoo}/\code{data.frame}
-#'         objects. If \code{merge = TRUE}, values in the list are merged.
+#' @return A list of indices/values of `xts`/`zoo`/`data.frame`
+#'         objects. If `merge = TRUE`, values in the list are merged.
 #'
 #' @export
 reduce <- function(x, ..., which.i = FALSE) UseMethod("reduce")
 
-#' @describeIn reduce S3 method for \code{zoo} object
+#' @describeIn reduce S3 method for `zoo` object
 #' @export
 reduce.zoo <- function(x, merge = TRUE, which.i = FALSE, on, ...) {
   index_xts <- utils::getFromNamespace("index.xts", "xts")
@@ -33,7 +33,7 @@ reduce.zoo <- function(x, merge = TRUE, which.i = FALSE, on, ...) {
   return(z)
 }
 
-#' @describeIn reduce S3 method for \code{data.frame}
+#' @describeIn reduce S3 method for `data.frame`
 #' @export
 reduce.data.frame <- function(x, merge = TRUE, which.i = FALSE, on, ...) {
   ti <- sapply(x, function(x) inherits(x, "POSIXt") | inherits(x, "Date"))
@@ -57,7 +57,7 @@ reduce.data.frame <- function(x, merge = TRUE, which.i = FALSE, on, ...) {
   return(z)
 }
 
-#' @describeIn reduce S3 method for \code{formula}
+#' @describeIn reduce S3 method for `formula`
 #' @export
 reduce.formula <- function(formula, data, which.i = FALSE, on, ...) {
   ti <- sapply(data, inherits, "POSIXt")

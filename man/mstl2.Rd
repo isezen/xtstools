@@ -17,8 +17,8 @@ mstl2(
 \method{plot}{mstl}(
   x,
   labels = colnames(X),
-  set.pars = list(mar = c(0, 6, 0, 6), oma = c(6, 0, 4, 0), tck = -0.01, mfrow =
-    c(nplot, 1)),
+  set.pars = list(mar = c(0, 6, 0, 6), oma = c(6, 0, 4, 0), tck = -0.01, mfrow = c(nplot,
+    1)),
   main = NULL,
   range.bars = TRUE,
   ...,
@@ -31,11 +31,11 @@ mstl2(
 \item{lambda}{BoxCox transformation coefficient. If \code{"auto"}, lambda is
 automatically selected. If \code{NULL} no transformation is done.}
 
-\item{s.window}{Seasonal windows to be used in the  decompositions. If scalar,
+\item{s.window}{Seasonal windows to be used in the decomposition. If scalar,
 the same value is used for all seasonal components. Otherwise, it should be a vector
 of the same length as the number of seasonal components.}
 
-\item{...}{Other arguments are passed to \code{\link[stats]{stl}}.}
+\item{...}{Other arguments are passed to \code{\link[stats:stl]{stats::stl()}}.}
 
 \item{iterate}{Number of iterations to use to refine the seasonal component.}
 
@@ -56,10 +56,10 @@ appears after ... and so cannot be abbreviated.}
 }
 \description{
 Decompose a time series into seasonal, trend and remainder components.
-\code{robust} is \code{TRUE} as different than \code{\link[forecast]{mstl}}.
-Also Boxcox transformation is accomplished by
-\code{\link{boxcox}} function.
+\code{robust} is \code{TRUE} as different than \code{\link[forecast:mstl]{forecast::mstl()}}.
+Also BoxCox transformation is accomplished by
+\code{\link[=boxcox]{boxcox()}} function.
 }
 \seealso{
-\code{\link[stats]{stl}}, \code{\link[forecast]{mstl}}
+\code{\link[stats:stl]{stats::stl()}}, \code{\link[forecast:mstl]{forecast::mstl()}}
 }

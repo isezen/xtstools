@@ -33,8 +33,8 @@ equal or less than \code{0}, it will be set to \code{NA} for the sake of
 transformation.
 
 \code{boxcox.lambda} function calculates best lambda value for
-             boxcox transformation in the interval of \code{lambda} values.
+boxcox transformation in the interval of \code{lambda} values.
 
 \code{boxcox.plus} calculates a value to add \code{x} values
-             which maximizes \code{loglik} function for transformation.
+which maximizes \code{loglik} function for transformation.
 }

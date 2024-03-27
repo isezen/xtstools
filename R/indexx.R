@@ -1,12 +1,12 @@
 #' indexx function
 #'
-#' Extreact various date properties from \code{POSIXt}, \code{xts} or \code{zoo}
+#' Extreact various date properties from `POSIXt`, `xts` or `zoo`
 #' objects.
 #'
-#' @param x \code{POSIXt}, \code{xts} or \code{zoo} object.
-#' @param unit Unit as character vector. Possible values are \code{sec, min,
-#' hour, mday, mon, year, wday, yday, isdst} and \code{yearmon, wdayhour, md,
-#' mdh, yhour, index}.
+#' @param x `POSIXt`, `xts` or `zoo` object.
+#' @param unit Unit as character vector. Possible values are `sec, min,
+#' hour, mday, mon, year, wday, yday, isdst` and `yearmon, wdayhour, md,
+#' mdh, yhour, index`.
 #'
 #' @export
 #' @keywords internal

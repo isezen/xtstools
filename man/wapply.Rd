@@ -32,7 +32,7 @@ columns, c(1, 2) indicates rows and columns. Where X has named
 dimnames, it can be a character vector selecting dimension
 names.}
 
-\item{FUN}{the function to be applied. See \code{\link{apply}}.}
+\item{FUN}{the function to be applied. See \code{\link[=apply]{apply()}}.}
 
 \item{step_size}{Step size of moving window over margin. This value can be a
 vector. Each value in the vector represents step size for a
@@ -42,17 +42,17 @@ new window in previous window.}
 vector. Each value in the vector represents window size for a
 new window in previous window.}
 
-\item{clamped}{This parameter defines hoe the windows will behave at the
+\item{clamped}{This parameter defines how the windows will behave at the
 edges of margin. If \code{TRUE}, windows are extended through
 end and begining of the margins.}
 
 \item{multiple}{This argument determines how \code{wapply} function will
 behave If \code{x} is a \code{zoo} object has columns more
 than one. If \code{multiple = FALSE} and \code{NCOL(x) > 1},
-each column is estimated seperately. Default is \code{FALSE}.}
+each column is estimated separately. Default is \code{FALSE}.}
 
-\item{mclapply}{If intented to use \code{\link[parallel]{mclapply}}, set
-\code{TRUE}. Otherwise, \code{\link[parallel]{parLapply}} is
+\item{mclapply}{If intented to use \code{\link[parallel:mclapply]{parallel::mclapply()}}, set
+\code{TRUE}. Otherwise, \code{\link[parallel:clusterApply]{parallel::parLapply()}} is
 used. Default is \code{TRUE}.}
 }
 \description{
@@ -61,8 +61,8 @@ to margins of an array or matrix.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: Default S3 method
+\item \code{wapply(default)}: Default S3 method
 
-\item \code{zoo}: S3 method for zoo object
+\item \code{wapply(zoo)}: S3 method for zoo object
+
 }}
-

@@ -50,23 +50,23 @@ get_by_factor <- function(index, by) {
 
 #' Convenience Function for Plotting xts or zoo Objects with ggplot2
 #'
-#' \code{fortify.zoo} takes a zoo object and converts it into a data frame
+#' `fortify.zoo` takes a zoo object and converts it into a data frame
 #' (intended for ggplot2).
 #'
-#' @param model An object of class \code{zoo} to be converted to a
-#'              \code{data.frame}.
+#' @param model An object of class `zoo` to be converted to a
+#'              `data.frame`.
 #' @param data,... Not used.
 #' @param names (list of) character vector(s). New names given to index/time
 #'              column, series indicator (if melted), and value column
 #'              (if melted). If only a subset of characters should be changed,
 #'              either NAs can be used or a named vector.
-#' @param melt If \code{TRUE}, resulting \code{data.frame} is in long format.
+#' @param melt If `TRUE`, resulting `data.frame` is in long format.
 #' @param sep If specified then the Series column is split into multiple
 #'            columns using sep as the split character.
 #' @param by bla bla bla
-#' @param reduce If \code{TRUE}, temporal resolution of the object is reduced.
-#'               This is useful especially for large \code{xts} objects.
-#'               See \code{\link{reduce}}.
+#' @param reduce If `TRUE`, temporal resolution of the object is reduced.
+#'               This is useful especially for large `xts` objects.
+#'               See [reduce()].
 #' @keywords internal
 fortify.zoo <- function(model, data, names = c("Index", "Series", "Value"),
                         melt = FALSE, sep = NULL, by = NULL, reduce = FALSE,
@@ -110,7 +110,7 @@ fortify.zoo <- function(model, data, names = c("Index", "Series", "Value"),
     if (!is.null(sep)) {
       sep <- if (is.character(sep)) sep[1] else "."
       spl <- strsplit(as.character(df[[2L]]), sep, fixed = TRUE)
-      ns <- len(spl[[1]])
+      ns <- length(spl[[1]])
       df <- data.frame(df[1L], do.call("rbind", spl), df[3:ncol(df)])
     }
     nl <- length(nm)

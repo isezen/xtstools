@@ -34,9 +34,9 @@ Can be abbreviated up to first two characters.}
 }
 \value{
 For \code{trend} method, if \code{predict} is \code{FALSE}, model
-        object is returned; otherwise predicted values return. For
-        \code{detrend} method, trend is removed from \code{x} object and
-        de-trended object with same class is returned.
+object is returned; otherwise predicted values return. For
+\code{detrend} method, trend is removed from \code{x} object and
+de-trended object with same class is returned.
 }
 \description{
 \code{trend} method creates model object for \code{loess} or \code{lm}
@@ -49,8 +49,8 @@ objects.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{zoo}: S3 method for \code{zoo} object
+\item \code{trend(zoo)}: S3 method for \code{zoo} object
 
-\item \code{data.frame}: S3 method for \code{data.frame} object
+\item \code{trend(data.frame)}: S3 method for \code{data.frame} object
+
 }}
-

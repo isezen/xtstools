@@ -36,7 +36,7 @@ columns using sep as the split character.}
 
 \item{reduce}{If \code{TRUE}, temporal resolution of the object is reduced.
 This is useful especially for large \code{xts} objects.
-See \code{\link{reduce}}.}
+See \code{\link[=reduce]{reduce()}}.}
 }
 \description{
 \code{fortify.zoo} takes a zoo object and converts it into a data frame

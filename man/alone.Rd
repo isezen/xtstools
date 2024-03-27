@@ -35,8 +35,11 @@ This function returns values/indices of values between at least two
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{formula}: S3 method for \code{formula} interface
+\item \code{alone(formula)}: S3 method for \code{formula} interface
 
-\item \code{formula}: S3 method for \code{formula} interface
 }}
+\section{Functions}{
+\itemize{
+\item \code{alone_index(formula)}: S3 method for \code{formula} interface
 
+}}

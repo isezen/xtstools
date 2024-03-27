@@ -6,9 +6,9 @@
 \alias{trim.zoo}
 \title{Trim data}
 \usage{
-trim(x, trim, na.rm)
+trim(x, trim, na.rm, ...)
 
-\method{trim}{default}(x, trim = 0.15, na.rm = FALSE)
+\method{trim}{default}(x, trim = 0.15, na.rm = FALSE, ...)
 
 \method{trim}{zoo}(x, ...)
 }
@@ -17,15 +17,20 @@ trim(x, trim, na.rm)
 
 \item{trim}{Fraction of observations to be trimmed from each end of \code{x}.
 Number of trimmed values are calculated on Non-NA values.}
+
+\item{na.rm}{A logical value indicating whether trimmed values should be
+stripped or not.}
+
+\item{...}{Other arguments.}
 }
 \description{
 Trim the data by sorting from each end. If \code{x} has dimension more than
-one, each column trimmed sperately.
+one, each column trimmed separately.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{default}: default S3 method
+\item \code{trim(default)}: default S3 method
 
-\item \code{zoo}: S3 method for class \code{zoo}
+\item \code{trim(zoo)}: S3 method for class \code{zoo}
+
 }}
-

@@ -34,7 +34,7 @@ period in the series.}
 }
 \value{
 A list of indices/values of \code{xts}/\code{zoo}/\code{data.frame}
-        objects. If \code{merge = TRUE}, values in the list are merged.
+objects. If \code{merge = TRUE}, values in the list are merged.
 }
 \description{
 This function reduces \code{xts}/\code{zoo}/\code{data.frame} object by the
@@ -45,10 +45,10 @@ than a specified threshold. \code{data.frame} must have at least one
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{zoo}: S3 method for \code{zoo} object
+\item \code{reduce(zoo)}: S3 method for \code{zoo} object
 
-\item \code{data.frame}: S3 method for \code{data.frame}
+\item \code{reduce(data.frame)}: S3 method for \code{data.frame}
 
-\item \code{formula}: S3 method for \code{formula}
+\item \code{reduce(formula)}: S3 method for \code{formula}
+
 }}
-

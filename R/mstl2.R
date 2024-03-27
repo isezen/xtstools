@@ -1,21 +1,21 @@
 #' Multiple seasonal decomposition
 #'
 #' Decompose a time series into seasonal, trend and remainder components.
-#' \code{robust} is \code{TRUE} as different than \code{\link[forecast]{mstl}}.
-#' Also Boxcox transformation is accomplished by
-#' \code{\link{boxcox}} function.
+#' `robust` is `TRUE` as different than [forecast::mstl()].
+#' Also BoxCox transformation is accomplished by
+#' [boxcox()] function.
 #'
-#' @param x Univariate time series of class \code{msts} or \code{ts}.
-#' @param lambda BoxCox transformation coefficient. If \code{"auto"}, lambda is
-#' automatically selected. If \code{NULL} no transformation is done.
-#' @param s.window Seasonal windows to be used in the  decompositions. If scalar,
+#' @param x Univariate time series of class `msts` or `ts`.
+#' @param lambda BoxCox transformation coefficient. If `"auto"`, lambda is
+#' automatically selected. If `NULL` no transformation is done.
+#' @param s.window Seasonal windows to be used in the decomposition. If scalar,
 #' the same value is used for all seasonal components. Otherwise, it should be a vector
 #' of the same length as the number of seasonal components.
-#' @param ... Other arguments are passed to \code{\link[stats]{stl}}.
+#' @param ... Other arguments are passed to [stats::stl()].
 #' @param iterate Number of iterations to use to refine the seasonal component.
-#' @param type Type of decomposition. \code{additive} or \code{multiplicative}.
+#' @param type Type of decomposition. `additive` or `multiplicative`.
 #'
-#' @seealso \code{\link[stats]{stl}}, \code{\link[forecast]{mstl}}
+#' @seealso [stats::stl()], [forecast::mstl()]
 #' @export
 mstl2 <- function(x, lambda = NULL, s.window = 13, ..., iterate = 2,
                   type = c("additive", "multiplicative")) {

@@ -2,11 +2,12 @@
 % Please edit documentation in R/xtstools.R
 \docType{package}
 \name{xtstools-package}
+\alias{xtstools}
 \alias{xtstools-package}
 \title{xtstools: Useful time-series tools}
 \description{
 scalex provides functions for climatological standardization
 }
 \author{
-İsmail SEZEN <sezenismail@gmail.com>
+İsmail SEZEN \href{mailto:sezenismail@gmail.com}{sezenismail@gmail.com}
 }
