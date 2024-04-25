@@ -1,8 +1,10 @@
 # xtstools
  Useful tools for time-series objects
 
- To install:
+##### Installation
 
-```bash
- pip install git+https://github.com/isezen/xtstools.git
+`devtools` package must be installed prior the command below.
+
+```R
+devtools::install_github("isezen/xtstools")
 ```
